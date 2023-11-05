@@ -1,7 +1,7 @@
 package com.driver.services;
 
-import com.driver.model.Director;
-import com.driver.model.Movie;
+import com.driver.Director;
+import com.driver.Movie;
 import com.driver.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
