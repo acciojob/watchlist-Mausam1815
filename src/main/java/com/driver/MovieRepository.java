@@ -1,4 +1,4 @@
-package com.driver.repository;
+package com.driver;
 
 import com.driver.Director;
 import com.driver.Movie;
