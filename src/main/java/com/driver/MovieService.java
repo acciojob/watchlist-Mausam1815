@@ -1,72 +1,57 @@
 package com.driver;
 
-import com.driver.Director;
-import com.driver.Movie;
-import com.driver.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class MovieService {
-    private final MovieRepository movieRepository;
-
     @Autowired
-    public MovieService(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
-    }
+    MovieRepository movieRepository;
 
-    public void addMovie(Movie movie) {
+    public String addMovie(Movie movie){
         movieRepository.addMovie(movie);
+        return "Movie added successfully";
     }
 
-    public void addDirector(Director director) {
+    public String addDirector(Director director) {
         movieRepository.addDirector(director);
+        return "Director added Successfully";
     }
 
-    public boolean addMovieDirectorPair(String movieName, String directorName) {
-        return movieRepository.addMovieDirectorPair(movieName, directorName);
+    public String addMovieDirectorPair(String movieName, String directorName) {
+        movieRepository.addMovieDirectorPair(movieName, directorName);
+        return "Movie and Director added Successfully";
     }
 
-    public ResponseEntity<Movie> getMovieByName(String movieName) {
-        Movie movie = movieRepository.getMovieByName(movieName);
-        if(movie != null) {
-            return ResponseEntity.ok(movie);
-        }else {
-            return ResponseEntity.notFound().build();
-        }
+    public Movie getMovieByName(String name) {
+        Movie movie = movieRepository.getMovieByName(name);
+        return movie;
     }
 
-    public ResponseEntity<Director> getDirectorByName(String directorName) {
-        Director director = movieRepository.getDirectorByName(directorName);
-        if(director != null) {
-            return ResponseEntity.ok(director);
-        }else {
-            return ResponseEntity.notFound().build();
-        }
+    public Director getDirectorByName(String name) {
+        Director director = movieRepository.getDirectorByName(name);
+        return director;
     }
 
-    public ResponseEntity<List<String>> getMoviesByDirectorName(String directorName) {
-        List<String> movies = movieRepository.getMoviesByDirectorName(directorName);
-        if(movies != null) {
-            return ResponseEntity.ok(movies);
-        }else {
-            return ResponseEntity.notFound().build();
-        }
+    public List<String> getMoviesByDirectorName(String director) {
+        List<String> list = movieRepository.getMoviesByDirectorName(director);
+        return list;
     }
 
-    public ResponseEntity<List<String>> getAllMovies() {
-        List<String> movies = movieRepository.getAllMovies();
-        return ResponseEntity.ok(movies);
+    public List<String> findAllMovies() {
+        List<String> list = movieRepository.findAllMovies();
+        return list;
     }
 
-    public void deleteDirectorByName(String directorName) {
-        movieRepository.deleteDirectorByName(directorName);
+    public String deleteDirectorByName(String name) {
+        movieRepository.deleteDirectorByName(name);
+        return "Director and Movie removed Successfully";
     }
 
-    public void deleteAllDirectors() {
+    public String deleteAllDirectors() {
         movieRepository.deleteAllDirectors();
+        return "All Record Deleted";
     }
 }
